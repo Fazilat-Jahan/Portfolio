@@ -1,101 +1,124 @@
+'use client'
 import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  const textArray = ["Developer", "Designer"];
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loop, setLoop] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const current = loop % textArray.length;
+      const fullText = textArray[current];
+
+      if (isDeleting) {
+        setText(fullText.substring(0, text.length - 1));
+        setTypingSpeed(50); // Faster speed when deleting
+      } else {
+        setText(fullText.substring(0, text.length + 1));
+        setTypingSpeed(150); // Slower speed when typing
+      }
+
+      if (!isDeleting && text === fullText) {
+        // Pause at the end of the word before deleting
+        setTimeout(() => setIsDeleting(true), 1000);
+      } else if (isDeleting && text === "") {
+        // Move to the next word after deleting
+        setIsDeleting(false);
+        setLoop(loop + 1);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loop, typingSpeed]);
+
+  return (
+    <div className="main-div">
+      <video src="/Background.mp4" autoPlay loop muted>
+      </video>
+
+      <div className="container">
+
+        <nav className="navbar-div">
+          <div className="logodiv">
+            <Image src={"/BrandLogo.png"} alt="Portfolio" width={180} height={110} priority /> </div>
+
+          <div className="button">
+            <Link href="#home">  <button className="hover:text-yellow-500"> Home </button> </Link>
+            <Link href="#about">  <button className="hover:text-yellow-500"> About </button> </Link>
+            <Link href="#contact">  <button className="hover:text-yellow-500"> Contact </button> </Link>
+            {/* <Link href="/">  <button> Projects </button> </Link>
+          <Link href="/">  <button> Blog </button> </Link> */}
+          </div>
+        </nav>
+
+        <main className="main-block">
+          <section id="home">
+
+            <div className="section-div">
+
+              <div className="heading">
+                <h1>Hi! I'm FrontEnd</h1>
+
+                <div className="animate-text">
+                  <span>{text}</span>
+                  <span className="animate-blink">|</span>
+                </div>
+
+                <Link href="/contact"> <button className="link">Contact Me</button> </Link>
+              </div>
+
+              <div className="img">
+                <Image src={"/Profile-Picture.png"} alt="Profile Picture" width={400} height={400} className="image" />
+              </div>
+
+            </div>
+          </section>
+
+          <section id="about">
+            
+            <div className="about-div">
+              <h1 className="heading-about"> About My Self </h1> </div>
+            <div>
+              <p>Hello! I'm Fazilat Jahan, a front-end developer and designer dedicated to crafting beautiful, intuitive digital experiences. With a strong foundation in HTML, CSS, and JavaScript, alongside expertise in frameworks like React and Next.js, I bring designs to life with seamless functionality. My design skills, allow me to create interfaces that are not only visually compelling but also user-centered.
+
+                I’m driven by a passion for detail and a commitment to delivering high-quality, responsive, and engaging websites. Staying up-to-date with industry trends is essential to me, and I constantly explore new tools and techniques to keep my work innovative. Whether I'm developing or designing, my goal is always the same: to make the digital world more accessible and enjoyable for users.
+
+                Let’s connect and discuss how I can contribute to your next project!</p>
+
+            </div>
+          </section>
+
+          <section id="contact">
+            <div className="contact-box">
+              <form action="" >
+                <h1 className="heading-about"> Contact Me </h1>
+                
+                <div className="input-info">
+                  <input type="text" placeholder="Name" required />
+                  <input type="email" placeholder="Email" required />
+                  <textarea placeholder="Message" required></textarea>
+                </div>
+                <div className="submit-info">
+                  <input type="submit" value="Submit" />
+                </div>
+
+              </form>
+            </div>
+
+          </section>
+
+        </main>
+
+      </div>
     </div>
   );
 }
