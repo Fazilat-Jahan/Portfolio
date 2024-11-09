@@ -88,11 +88,11 @@ export default function Home() {
             <div className="about-div">
               <h1 className="heading-about"> About My Self </h1> </div>
             <div>
-              <p>Hello! I'm Fazilat Jahan, a front-end developer and designer dedicated to crafting beautiful, intuitive digital experiences. With a strong foundation in HTML, CSS, and JavaScript, alongside expertise in frameworks like React and Next.js, I bring designs to life with seamless functionality. My design skills, allow me to create interfaces that are not only visually compelling but also user-centered.
+              <p>Hello! I am Fazilat Jahan, a front-end developer and designer dedicated to crafting beautiful, intuitive digital experiences. With a strong foundation in HTML, CSS, and JavaScript, alongside expertise in frameworks like React and Next.js, I bring designs to life with seamless functionality. My design skills, allow me to create interfaces that are not only visually compelling but also user-centered.
 
-                I’m driven by a passion for detail and a commitment to delivering high-quality, responsive, and engaging websites. Staying up-to-date with industry trends is essential to me, and I constantly explore new tools and techniques to keep my work innovative. Whether I'm developing or designing, my goal is always the same: to make the digital world more accessible and enjoyable for users.
+I am driven by a passion for detail and a commitment to delivering high-quality, responsive, and engaging websites. Staying up-to-date with industry trends is essential to me, and I constantly explore new tools and techniques to keep my work innovative. Whether I am developing or designing, my goal is always the same: to make the digital world more accessible and enjoyable for users.
 
-                Let’s connect and discuss how I can contribute to your next project!</p>
+Lets connect and discuss how I can contribute to your next project!</p>
 
             </div>
           </section>
