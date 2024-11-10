@@ -73,7 +73,7 @@ export default function Home() {
                   <span className="animate-blink">|</span>
                 </div>
 
-                <Link href="/contact"> <button className="link">Contact Me</button> </Link>
+                <Link href="/contact" style={{textDecoration: 'none'}}> <button className="link">Contact Me</button> </Link>
               </div>
 
               <div className="img">
